@@ -1,7 +1,7 @@
-package com.nerdcoder.productapp.service;
+package com.nerdcoder.jeelax.service;
 
-import com.nerdcoder.productapp.entity.Users;
-import com.nerdcoder.productapp.repository.UserDetailsRepository;
+import com.nerdcoder.jeelax.entity.Users;
+import com.nerdcoder.jeelax.repository.UserDetailsRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

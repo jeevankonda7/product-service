@@ -1,4 +1,4 @@
-package com.nerdcoder.productapp.entity;
+package com.nerdcoder.jeelax.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "USER_DETAILS")

@@ -1,7 +1,7 @@
-package com.nerdcoder.productapp.service;
+package com.nerdcoder.jeelax.service;
 
-import com.nerdcoder.productapp.entity.ProductDetails;
-import com.nerdcoder.productapp.model.ProductsInventoryCsvRepresentation;
+import com.nerdcoder.jeelax.entity.ProductDetails;
+import com.nerdcoder.jeelax.model.ProductsInventoryCsvRepresentation;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 

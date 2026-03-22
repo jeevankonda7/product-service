@@ -1,7 +1,7 @@
-package com.nerdcoder.productapp.controller;
+package com.nerdcoder.jeelax.controller;
 
-import com.nerdcoder.productapp.entity.ProductDetails;
-import com.nerdcoder.productapp.service.ProductServiceImpl;
+import com.nerdcoder.jeelax.entity.ProductDetails;
+import com.nerdcoder.jeelax.service.ProductServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

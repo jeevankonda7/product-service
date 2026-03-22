@@ -1,6 +1,6 @@
-package com.nerdcoder.productapp.service;
+package com.nerdcoder.jeelax.service;
 
-import com.nerdcoder.productapp.entity.ProductDetails;
+import com.nerdcoder.jeelax.entity.ProductDetails;
 
 import java.util.Optional;
 

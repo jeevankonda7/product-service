@@ -1,4 +1,4 @@
-package com.nerdcoder.productapp.service;
+package com.nerdcoder.jeelax.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;

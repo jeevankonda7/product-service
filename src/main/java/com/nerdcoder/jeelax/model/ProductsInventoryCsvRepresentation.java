@@ -1,4 +1,4 @@
-package com.nerdcoder.productapp.model;
+package com.nerdcoder.jeelax.model;
 
 import com.opencsv.bean.CsvBindByName;
 import lombok.*;

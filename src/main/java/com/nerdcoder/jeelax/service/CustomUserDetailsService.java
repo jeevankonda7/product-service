@@ -1,7 +1,6 @@
-package com.nerdcoder.productapp.service;
+package com.nerdcoder.jeelax.service;
 
-import com.nerdcoder.productapp.repository.UserDetailsRepository;
-import lombok.NoArgsConstructor;
+import com.nerdcoder.jeelax.repository.UserDetailsRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

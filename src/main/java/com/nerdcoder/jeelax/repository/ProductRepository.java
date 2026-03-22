@@ -1,6 +1,6 @@
-package com.nerdcoder.productapp.repository;
+package com.nerdcoder.jeelax.repository;
 
-import com.nerdcoder.productapp.entity.ProductDetails;
+import com.nerdcoder.jeelax.entity.ProductDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

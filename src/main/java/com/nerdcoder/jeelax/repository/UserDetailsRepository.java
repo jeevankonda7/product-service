@@ -1,6 +1,6 @@
-package com.nerdcoder.productapp.repository;
+package com.nerdcoder.jeelax.repository;
 
-import com.nerdcoder.productapp.entity.Users;
+import com.nerdcoder.jeelax.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

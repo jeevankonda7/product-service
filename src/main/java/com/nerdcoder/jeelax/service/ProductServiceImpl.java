@@ -1,11 +1,10 @@
-package com.nerdcoder.productapp.service;
+package com.nerdcoder.jeelax.service;
 
-import com.nerdcoder.productapp.entity.ProductDetails;
-import com.nerdcoder.productapp.repository.ProductRepository;
+import com.nerdcoder.jeelax.entity.ProductDetails;
+import com.nerdcoder.jeelax.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 

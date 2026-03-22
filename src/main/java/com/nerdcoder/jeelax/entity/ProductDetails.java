@@ -1,4 +1,4 @@
-package com.nerdcoder.productapp.entity;
+package com.nerdcoder.jeelax.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
