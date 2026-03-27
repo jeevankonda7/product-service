@@ -7,6 +7,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,13 +16,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class FileProcessingService {
 
+
+  @Autowired
+  private Executor virtualThreadExecutor;
+
+  private final Object fileLock = new Object();
+
   public Set<ProductDetails> parseCsv(MultipartFile file) throws Exception {
+
     try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
       HeaderColumnNameMappingStrategy<ProductsInventoryCsvRepresentation> productFileHeadersStrategy =
               new HeaderColumnNameMappingStrategy<>();
@@ -46,29 +55,71 @@ public class FileProcessingService {
     }
   }
 
+//  public void writeRecordsToCsv(final List<ProductDetails> productsList) {
+//    virtualThreadExecutor.execute(() -> {
+//      Path path = Path.of("reports/saved_products_details.csv");
+//      try {
+//        boolean fileExists = Files.exists(path);
+//        if (!fileExists) {
+//          Files.createFile(path);
+//        }
+//        try (CSVWriter writer = new CSVWriter(new FileWriter(path.toFile(), true))) {
+//          if (!fileExists) {
+//            String[] headers = new String[]{"productId", "productName", "productPrice", "productManufacturer"};
+//            writer.writeNext(headers);
+//          }
+//          List<String[]> productDetails = productsList.stream()
+//                  .map(productData -> new String[]{
+//                          productData.getProductId(),
+//                          productData.getProductName(),
+//                          String.valueOf(productData.getPrice()),
+//                          productData.getManufacturer()
+//                  }).toList();
+//          writer.writeAll(productDetails);
+//        }
+//      } catch (IOException e) {
+//        log.error("unable to create file");
+//      }
+//
+//    });
+//  }
+
   public void writeRecordsToCsv(final List<ProductDetails> productsList) {
+    virtualThreadExecutor.execute(() -> {
+      synchronized (fileLock) {
+        writeToFile(productsList);
+      }
+    });
+  }
+
+  private void writeToFile(List<ProductDetails> productsList) {
     Path path = Path.of("reports/saved_products_details.csv");
     try {
+      Files.createDirectories(path.getParent()); // ensure folder exists
+
       boolean fileExists = Files.exists(path);
       if (!fileExists) {
         Files.createFile(path);
       }
-      try(CSVWriter writer = new CSVWriter(new FileWriter(path.toFile(), true))) {
+
+      try (CSVWriter writer = new CSVWriter(new FileWriter(path.toFile(), true))) {
         if (!fileExists) {
-          String[] headers = new String[]{"productId", "productName", "productPrice", "productManufacturer"};
-          writer.writeNext(headers);
+          writer.writeNext(new String[]{"productId", "productName", "productPrice", "productManufacturer"});
         }
+
         List<String[]> productDetails = productsList.stream()
-                        .map(productData -> new String[]{
-                                productData.getProductId(),
-                                productData.getProductName(),
-                                String.valueOf(productData.getPrice()),
-                                productData.getManufacturer()
-                        }).toList();
+                .map(p -> new String[]{
+                        p.getProductId(),
+                        p.getProductName(),
+                        String.valueOf(p.getPrice()),
+                        p.getManufacturer()
+                }).toList();
+
         writer.writeAll(productDetails);
       }
+
     } catch (IOException e) {
-      log.error("unable to create file");
+      log.error("unable to create file", e);
     }
   }
 
